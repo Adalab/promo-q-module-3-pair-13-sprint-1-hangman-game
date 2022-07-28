@@ -1,21 +1,23 @@
 import "../styles/App.scss";
-import {useState} from 'react';
+import { useState } from "react";
 
 function App() {
-  const [inputName, setInputName] = useState('');
-  const[numberOfErrors, setNumberOfErrors]= useState(0);
-  
+  const [inputName, setInputName] = useState("");
+  const [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState("");
+
   const handleChange = (ev) => {
     setInputName(ev.currentTarget.value);
-    
-  }
+    setLastLetter(ev.currentTarget.value);
+  };
 
   const handleClick = (ev) => {
-    setNumberOfErrors(numberOfErrors +1);
+    setNumberOfErrors(numberOfErrors + 1);
+  };
 
-  }
   console.log(inputName);
   console.log(parseInt(numberOfErrors));
+
   return (
     <div className="page">
       <header>
@@ -53,10 +55,10 @@ function App() {
               name="last-letter"
               id="last-letter"
               onChange={handleChange}
-            />
+            />{" "}
           </form>{" "}
         </section>{" "}
-        <section className={"dummy error-"+numberOfErrors}>
+        <section className={"dummy error-" + numberOfErrors}>
           <span className="error-13 eye"> </span>{" "}
           <span className="error-12 eye"> </span>{" "}
           <span className="error-11 line"> </span>{" "}
@@ -70,8 +72,7 @@ function App() {
           <span className="error-3 line"> </span>{" "}
           <span className="error-2 line"> </span>{" "}
           <span className="error-1 line"> </span>{" "}
-
-          <button onClick={handleClick}>Incrementar</button>
+          <button onClick={handleClick}> Incrementar </button>{" "}
         </section>{" "}
       </main>{" "}
     </div>
