@@ -4,11 +4,17 @@ import { useState } from "react";
 function App() {
   const [inputName, setInputName] = useState("");
   const [numberOfErrors, setNumberOfErrors] = useState(0);
+  // constante de estado para guardar la última letra escrita por la jugadora
   const [lastLetter, setLastLetter] = useState("");
 
   const handleChange = (ev) => {
-    setInputName(ev.currentTarget.value);
-    setLastLetter(ev.currentTarget.value);
+    //se le asigna a la constante true si es una letra y false si no es una letra
+    const isValid = isLetter(ev.currentTarget.value);
+    if (isValid === true) {
+      setInputName(ev.currentTarget.value);
+      //llamar a la función y asignarle el valor del input
+      setLastLetter(ev.currentTarget.value);
+    }
   };
 
   const handleClick = (ev) => {
@@ -17,6 +23,11 @@ function App() {
 
   console.log(inputName);
   console.log(parseInt(numberOfErrors));
+
+  //función que comprueba si la letra que estás guardando en el estado es válida o no
+  const isLetter = (letter) => {
+    return letter.length === 1 && letter.match(/[a-z]/i) ? true : false;
+  };
 
   return (
     <div className="page">
