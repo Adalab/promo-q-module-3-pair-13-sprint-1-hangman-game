@@ -6,14 +6,17 @@ function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   // constante de estado para guardar la última letra escrita por la jugadora
   const [lastLetter, setLastLetter] = useState("");
+  const [word, setWord] = useState("katakroker");
+  const [userLetters, setUserLetters] = useState ([]);
 
   const handleChange = (ev) => {
     //se le asigna a la constante true si es una letra y false si no es una letra
-    const isValid = isLetter(ev.currentTarget.value);
-    if (isValid === true) {
-      setInputName(ev.currentTarget.value);
+    setInputName(ev.currentTarget.value);
+    if (isLetter(inputName)) {
+      //setInputName(inputName);
       //llamar a la función y asignarle el valor del input
-      setLastLetter(ev.currentTarget.value);
+      setLastLetter(inputName);
+      setUserLetters(inputName);
     }
   };
 
@@ -29,6 +32,11 @@ function App() {
     return letter.length === 1 && letter.match(/[a-z]/i) ? true : false;
   };
 
+  const renderSolutionLetters = () => {
+    const wordLetters = word.split('');
+    return wordLetters.map(letter => <li class="letter"></li> )
+  }
+
   return (
     <div className="page">
       <header>
@@ -39,11 +47,7 @@ function App() {
           <div className="solution">
             <h2 className="title"> Solución: </h2>{" "}
             <ul className="letters">
-              <li className="letter"> k </li> <li className="letter"> a </li>{" "}
-              <li className="letter"> </li> <li className="letter"> a </li>{" "}
-              <li className="letter"> k </li> <li className="letter"> r </li>{" "}
-              <li className="letter"> </li> <li className="letter"> k </li>{" "}
-              <li className="letter"> e </li> <li className="letter"> r </li>{" "}
+              {renderSolutionLetters()}
             </ul>{" "}
           </div>{" "}
           <div className="error">
@@ -66,6 +70,7 @@ function App() {
               name="last-letter"
               id="last-letter"
               onChange={handleChange}
+              value={inputName}
             />{" "}
           </form>{" "}
         </section>{" "}
